@@ -11,13 +11,13 @@ function charger_css_js()
     $version_js =  filemtime(plugin_dir_path(__FILE__) . "js/filtrepays.js");
 
     wp_enqueue_style(
-        "filtrepays",
+        "filtrepost",
         plugin_dir_url(__FILE__) . "/style.css",
         array(),
         $version_css
     );
     wp_enqueue_script(
-        "filtrepays",
+        "filtrepost",
         plugin_dir_url(__FILE__) . "js/filtrepays.js",
         array(),
         $version_js,
@@ -26,10 +26,12 @@ function charger_css_js()
 }
 add_action("wp_enqueue_scripts", "charger_css_js");
 
-function genere_boutons(){
-    $pays = ["France", "États-Unis", "Canada", "Argentine", "Chili", "Belgique", "Maroc", "Mexique", "Japon", "Italie", "Islande", "Chine", "Grèce", "Suisse"]; //array des pays : liste 
+function genere_boutons()
+{
+    // $pays = get_pays(); //array des pays : liste 
+    $pays = ["France", "États-Unis", "Canada", "Argentine", "Chili", "Belgique", "Maroc", "Mexique", "Japon", "Italie", "Islande", "Chine", "Grèce", "Suisse"];
     $contenu = "";
-    foreach($pays as $elm){
+    foreach ($pays as $elm) {
         $nom = $elm;
 
         $contenu .= "<button data-id='$nom'> $nom </button>";
