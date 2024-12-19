@@ -27,12 +27,11 @@ function charger_css_js()
 add_action("wp_enqueue_scripts", "charger_css_js");
 
 function genere_boutons(){
-    $categories = get_categories(); //array des pays : liste 
+    $pays = ["France", "États-Unis", "Canada", "Argentine", "Chili", "Belgique", "Maroc", "Mexique", "Japon", "Italie", "Islande", "Chine", "Grèce", "Suisse"]; //array des pays : liste 
     $contenu = "";
-    foreach($categories as $elm){
-        $nom = $elm->name;
-        $id = $elm->term_id;
-        $contenu .= "<button data-id='$id'> $nom </button>";
+    foreach($pays as $elm){
+        $nom = $elm;
+        $contenu .= "<button data-id='". $nom. "'> " . $nom . "</button>";
     } return "<div class='filtre__bouton'>$contenu</div>";
 }
-add_shortcode('extraire_categories', 'genere_boutons');
+add_shortcode('extraire_pays', 'genere_boutons');
