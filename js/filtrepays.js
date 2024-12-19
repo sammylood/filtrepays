@@ -1,22 +1,24 @@
-(function(){
+let pays = "France"; // France par defaut
+
+extraire_pays(pays);
+
     let filtre__bouton = document.querySelectorAll('.filtre__bouton button');
     console.log(filtre__bouton.length);
 
-    for(const elm of filtre__bouton){
+    for(const elm of bouton__pays){
     elm.addEventListener('mousedown', function(e){
-        console.log(e.target.dataset.id)
-        extraire_cours(e.target.dataset.id);
-    })
+        // console.log(e.target.dataset.id)
+        pays = e.target.dataset.id;
+        extraire_pays(pays);
+        document.addEventListener("DOMContentLoaded", extraire_pays);
+    });
 }
 
-function afficherArticles(data){
-     console.log("Articles récupérés: ", data); // Affiche les articles récupérés pour déboguer
-}
 
-function extraire_cours(categorie) {
+function extraire_pays(pays) {
 // Construction de l’URL pour appeler l’API REST en fonction de la catégorie sélectionnée
 fetch(
-`http://localhost/31w/wp-json/wp/v2/posts?categories=${categorie}&per_page=30`
+`http://localhost/31w/wp-json/wp/v2/posts?search=${pays}&per_page=30`
 )
 .then((response) => response.json()) // Conversion de la réponse en JSON
 .then((data) => {
@@ -28,5 +30,18 @@ afficherArticles(data); // Appel à la fonction pour afficher les articles
 }
 
 
-})();
+function afficherArticles(data){
+     console.log("Articles récupérés: ", data); // Affiche les articles récupérés pour déboguer
+     const container = document.querySelector("filtre__pays");
+     container.innerHTML = "";
 
+     data.forEach((data) => {
+        const item = document.createElement("div");
+        item.className = "pays-item";
+        
+        const nomPays = document.createElement("h2");
+        nomPays.className = "pays-titre";
+        nomPays.textContent = nomPays.title.rendered;
+     }
+    );
+}

@@ -31,7 +31,9 @@ function genere_boutons(){
     $contenu = "";
     foreach($pays as $elm){
         $nom = $elm;
-        $contenu .= "<button data-id='". $nom. "'> " . $nom . "</button>";
-    } return "<div class='filtre__bouton'>$contenu</div>";
+
+        $contenu .= "<button data-id='$nom'> $nom </button>";
+    }
+    return "<div class='filtre__bouton'>$contenu</div>";
 }
 add_shortcode('extraire_pays', 'genere_boutons');
